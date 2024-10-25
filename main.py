@@ -19,7 +19,7 @@ time_start = time.time()
 
 ############# LES VARIABLES ################
 
-folder_result = "2_try_batch"  # le nom du dossier de résultat
+folder_result = "3_first_fonctionne"  # le nom du dossier de résultat
 
 random_seed_train = None
 # la seed de test, toujours garder la même pour pouvoir comparer
@@ -27,14 +27,14 @@ random_seed_test = 2002
 
 
 ##### Le modèle de résolution de l'équation de la chaleur
-nb_itt = 1000  # le nb d'epoch
-save_rate = 100
+nb_itt = 3000  # le nb d'epoch
+save_rate = 300
 poids = [1, 1]  # les poids pour la loss
 
 batch_size = 5000  # la taille d'un batch
 # batch_size_pde = 1  # le nb de points pour la pde ### Pour l'instant on prend la même taille
 
-n_pde = 10000
+n_pde = 1000000
 
 n_data_test = 5000
 n_pde_test = 5000
@@ -81,6 +81,8 @@ t_norm_max = t_norm.max()
 
 x_norm_max = x_norm.max()
 y_norm_max = y_norm.max()
+x_norm_min = x_norm.min()
+y_norm_min = y_norm.min()
 
 mat_data_full = scipy.io.loadmat("cylinder_data.mat")
 data_full = mat_data_full["stack"]
@@ -112,8 +114,8 @@ rectangle = Rectangle(
     y_max=y_norm_max,
     t_min=t_norm_min,
     t_max=t_norm_max,
-    x_min=x_norm.min(),
-    x_max=x_norm.max(),
+    x_min=x_norm_min,
+    y_min=y_norm_min,
 )  # le domaine de résolution
 
 X_pde = rectangle.generate_lhs(n_pde).to(device)
@@ -125,7 +127,7 @@ X_pde = rectangle.generate_lhs(n_pde).to(device)
 ### Pour test
 torch.manual_seed(random_seed_test)
 np.random.seed(random_seed_test)
-X_test_pde = rectangle.generate_random(n_pde_test).to(device)
+X_test_pde = rectangle.generate_lhs(n_pde_test).to(device)
 points_coloc_test = np.random.choice(len(X_full), n_data_test, replace=False)
 X_test_data = torch.from_numpy(X_full[points_coloc_test]).to(device)
 U_test_data = torch.from_numpy(U_full[points_coloc_test]).to(device)
