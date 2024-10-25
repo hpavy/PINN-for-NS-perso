@@ -56,22 +56,18 @@ class PINNs(nn.Module):
         super().__init__()
         self.couches = nn.ModuleList(
             [
-                nn.Linear(3, 64),
-                nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                # nn.Linear(64, 64),
-                nn.Linear(64, 3),
+                nn.Linear(3, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 32),
+                nn.Linear(32, 3),
             ]
         )
         self.initial_param()

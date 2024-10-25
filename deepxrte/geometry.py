@@ -60,14 +60,15 @@ class Rectangle:
         """
         points = torch.stack(
             (
-                (self.x_max - self.x_min) * torch.rand(n),
-                (self.y_max - self.y_min) * torch.rand(n),
+                (self.x_max - self.x_min) * torch.rand(n) + self.x_min,
+                (self.y_max - self.y_min) * torch.rand(n) + self.y_min,
             ),
             dim=1,
         )
         if not init:
             return torch.cat(
-                (points, torch.rand(n, 1) * (self.t_max - self.t_min)), dim=1
+                (points, torch.rand(n, 1) * (self.t_max - self.t_min) + self.t_min),
+                dim=1,
             ).requires_grad_()
         else:
             return torch.cat((points, torch.zeros(n, 1)), dim=1).requires_grad_()
