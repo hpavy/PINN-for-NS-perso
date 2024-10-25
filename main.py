@@ -108,7 +108,12 @@ dossier.mkdir(parents=True, exist_ok=True)
 
 
 rectangle = Rectangle(
-    x_max=x_norm_max, y_max=y_norm_max, t_min=t_norm_min, t_max=t_norm_max
+    x_max=x_norm_max,
+    y_max=y_norm_max,
+    t_min=t_norm_min,
+    t_max=t_norm_max,
+    x_min=x_norm.min(),
+    x_max=x_norm.max(),
 )  # le domaine de résolution
 
 X_pde = rectangle.generate_lhs(n_pde).to(device)
