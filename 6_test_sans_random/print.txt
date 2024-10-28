@@ -1,0 +1,20 @@
+Nouveau modèle
+
+--------------------------
+Starting at epoch: 0
+--------------------------
+---------------------
+Epoch 1/3000 :
+Train : loss: 5.848e-01, data: 5.708e-01, pde: 1.393e-02
+Test  : loss: 5.966e-01, data: 5.824e-01, pde: 1.424e-02
+time: 25s
+---------------------
+Epoch 2/3000 :
+Train : loss: 4.813e-01, data: 4.737e-01, pde: 7.572e-03
+Test  : loss: 5.382e-01, data: 5.306e-01, pde: 7.654e-03
+time: 45s
+---------------------
+Epoch 3/3000 :
+Train : loss: 4.795e-01, data: 4.732e-01, pde: 6.345e-03
+Test  : loss: 5.638e-01, data: 5.574e-01, pde: 6.337e-03
+time: 66s

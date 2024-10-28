@@ -19,16 +19,16 @@ time_start = time.time()
 
 ############# LES VARIABLES ################
 
-folder_result = "3_first_fonctionne"  # le nom du dossier de résultat
+folder_result = "6_test_sans_random"  # le nom du dossier de résultat
 
-random_seed_train = None
+random_seed_train = 168
 # la seed de test, toujours garder la même pour pouvoir comparer
-random_seed_test = 2002
+# random_seed_test = 2002
 
 
 ##### Le modèle de résolution de l'équation de la chaleur
 nb_itt = 3000  # le nb d'epoch
-save_rate = 300
+save_rate = 20
 poids = [1, 1]  # les poids pour la loss
 
 batch_size = 5000  # la taille d'un batch
@@ -48,7 +48,8 @@ gamma_scheduler = 0.999
 
 ##### Le code ###############################
 ###############################################
-
+torch.manual_seed(random_seed_train)
+np.random.seed(random_seed_train)
 # La data
 mat_data = scipy.io.loadmat("cylinder_Re3900_36points_100snaps.mat")
 data = mat_data["stack"]
@@ -125,8 +126,8 @@ X_pde = rectangle.generate_lhs(n_pde).to(device)
 
 
 ### Pour test
-torch.manual_seed(random_seed_test)
-np.random.seed(random_seed_test)
+# torch.manual_seed(random_seed_test)
+# np.random.seed(random_seed_test)
 X_test_pde = rectangle.generate_lhs(n_pde_test).to(device)
 points_coloc_test = np.random.choice(len(X_full), n_data_test, replace=False)
 X_test_data = torch.from_numpy(X_full[points_coloc_test]).to(device)
